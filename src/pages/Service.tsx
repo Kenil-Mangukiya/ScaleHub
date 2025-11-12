@@ -8,16 +8,24 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { staggerContainer, staggerItem } from "@/utils/motionVariants";
 import webDevImage from "@/assets/web-development.png";
+import mobileAppImage from "@/assets/hash-dashboard.png";
 import voiceAgentMockup from "@/assets/voice-agent-mockup.png";
 import devopsImage from "@/assets/devops-illustration.png";
+import roboticsDashboard from "@/assets/robotics-dashboard.jpg";
 
 const services = [
   {
     icon: Code,
-    title: "Website Development",
-    description: "Custom, responsive websites built with modern technologies. From landing pages to complex web platforms, we deliver pixel-perfect designs that convert visitors into customers.",
-    image: webDevImage,
-    features: ["Responsive Design", "SEO Optimized", "Fast Performance", "Modern Stack"]
+    title: "Mobile App Development",
+    description:
+      "Native and cross-platform mobile experiences crafted for performance and usability. We build apps that feel at home on every device and keep your users engaged.",
+    image: mobileAppImage,
+    features: [
+      "iOS & Android",
+      "Cross-platform",
+      "App Store Launch",
+      "Offline-first UX",
+    ],
   },
   {
     icon: Smartphone,
@@ -30,14 +38,14 @@ const services = [
     icon: Phone,
     title: "Voice Agent CRM",
     description: "AI-powered voice assistants integrated with your CRM. Automate customer interactions, handle inquiries, and provide 24/7 support with natural language processing.",
-    image: voiceAgentMockup,
+    image: roboticsDashboard,
     features: ["24/7 Availability", "Natural Language", "CRM Integration", "Analytics Dashboard"]
   },
   {
     icon: Bot,
     title: "AI Automation Services",
     description: "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
-    image: voiceAgentMockup,
+    image: roboticsDashboard,
     features: ["Workflow Automation", "Document AI", "Predictive Analytics", "Custom Models"]
   },
   {
@@ -128,7 +136,7 @@ export default function Services() {
                     {/* Image */}
                     <motion.div
                       variants={staggerItem}
-                      className={`relative h-64 overflow-hidden rounded-xl lg:min-h-[24rem] ${
+                      className={`relative h-64 overflow-hidden rounded-xl lg:min-h-[24rem] mt-6 mb-6 lg:mr-6 ${
                         index % 2 === 0 ? "lg:col-start-2" : "lg:col-start-1"
                       }`}
                     >
