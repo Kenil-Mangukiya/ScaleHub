@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -122,15 +120,14 @@ export default function Home() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative"
+              className="relative group"
             >
               <Image
                 src={heroDashboard}
                 alt="AI automation dashboard"
-                width={960}
-                height={640}
                 priority
-                className="rounded-xl shadow-2xl transition-transform duration-500 hover:scale-105"
+                className="w-full rounded-xl shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                sizes="(min-width: 1024px) 45vw, 100vw"
               />
             </motion.div>
           </div>
@@ -206,22 +203,28 @@ export default function Home() {
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
-            <motion.div variants={staggerItem} className="relative group">
+            <motion.div
+              variants={staggerItem}
+              className="relative group h-[260px] sm:h-[320px] lg:h-[420px] overflow-hidden rounded-xl shadow-xl"
+            >
               <Image
                 src={voiceAgentMockup}
                 alt="Voice Agent CRM Interface"
-                width={960}
-                height={640}
-                className="rounded-xl shadow-xl transition-all duration-500 hover:scale-105 hover:brightness-110"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
+                sizes="(min-width: 1024px) 40vw, 100vw"
               />
             </motion.div>
-            <motion.div variants={staggerItem} className="relative group">
+            <motion.div
+              variants={staggerItem}
+              className="relative group h-[260px] sm:h-[320px] lg:h-[420px] overflow-hidden rounded-xl shadow-xl"
+            >
               <Image
                 src={heroDashboard}
                 alt="Analytics Dashboard"
-                width={960}
-                height={640}
-                className="rounded-xl shadow-xl transition-all duration-500 hover:scale-105 hover:brightness-110"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
+                sizes="(min-width: 1024px) 40vw, 100vw"
               />
             </motion.div>
           </motion.div>
@@ -255,11 +258,11 @@ export default function Home() {
           >
             {/* Starter */}
             <motion.div variants={staggerItem}>
-              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all">
+              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Starter</h3>
                 <p className="text-4xl font-bold text-primary mb-1">$49<span className="text-lg text-muted-foreground">/mo</span></p>
                 <p className="text-muted-foreground mb-6">Perfect for small teams</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   <li className="flex items-center text-sm">
                     <TrendingUp className="w-4 h-4 text-accent mr-2" />
                     Up to 5 users
@@ -273,7 +276,7 @@ export default function Home() {
                     Standard analytics
                   </li>
                 </ul>
-                <Button asChild variant="outline" className="w-full">
+                <Button asChild variant="outline" className="w-full mt-auto">
                   <Link href="/contact">Get Started</Link>
                 </Button>
               </Card>
@@ -281,14 +284,14 @@ export default function Home() {
 
             {/* Growth (Featured) */}
             <motion.div variants={staggerItem}>
-              <Card className="p-8 h-full border-2 border-primary hover:scale-105 hover:shadow-xl transition-all relative">
+              <Card className="relative flex flex-col p-8 h-full border-2 border-primary hover:scale-105 hover:shadow-xl transition-all">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-sm font-medium">
                   Most Popular
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Growth</h3>
                 <p className="text-4xl font-bold text-primary mb-1">$99<span className="text-lg text-muted-foreground">/mo</span></p>
                 <p className="text-muted-foreground mb-6">For growing businesses</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   <li className="flex items-center text-sm">
                     <TrendingUp className="w-4 h-4 text-accent mr-2" />
                     Up to 20 users
@@ -306,7 +309,7 @@ export default function Home() {
                     AI integrations
                   </li>
                 </ul>
-                <Button asChild variant="hero" className="w-full">
+                <Button asChild variant="hero" className="w-full mt-auto">
                   <Link href="/contact">Get Started</Link>
                 </Button>
               </Card>
@@ -314,11 +317,11 @@ export default function Home() {
 
             {/* Enterprise */}
             <motion.div variants={staggerItem}>
-              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all">
+              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Enterprise</h3>
                 <p className="text-4xl font-bold text-primary mb-1">Custom</p>
                 <p className="text-muted-foreground mb-6">Tailored for enterprises</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   <li className="flex items-center text-sm">
                     <TrendingUp className="w-4 h-4 text-accent mr-2" />
                     Unlimited users
@@ -336,7 +339,7 @@ export default function Home() {
                     Dedicated support
                   </li>
                 </ul>
-                <Button asChild variant="outline" className="w-full">
+                <Button asChild variant="outline" className="w-full mt-auto">
                   <Link href="/contact">Contact Sales</Link>
                 </Button>
               </Card>
