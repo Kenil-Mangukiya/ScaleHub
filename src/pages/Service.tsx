@@ -47,6 +47,8 @@ const services = [
     description: "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
     image: roboticsDashboard,
     imageFit: "contain" as const,
+    gridTemplate: "lg:grid-cols-[1.15fr_0.85fr]",
+    imageWrapperClassName: "lg:max-w-[28rem] w-full lg:col-start-1 lg:mr-0 lg:ml-0 lg:mx-auto",
     features: ["Workflow Automation", "Document AI", "Predictive Analytics", "Custom Models"]
   },
   {
@@ -104,9 +106,9 @@ export default function Services() {
                 <Card className={`overflow-hidden hover:shadow-xl transition-all border-border ${
                   index % 2 === 0 ? "" : ""
                 }`}>
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${
-                    index % 2 === 0 ? "" : "lg:grid-flow-dense"
-                  }`}>
+                  <div className={`grid grid-cols-1 gap-8 ${
+                    service.gridTemplate ?? "lg:grid-cols-2"
+                  } ${index % 2 === 0 ? "" : "lg:grid-flow-dense"}`}>
                     {/* Content */}
                     <motion.div
                       variants={staggerItem}
@@ -139,7 +141,7 @@ export default function Services() {
                       variants={staggerItem}
                       className={`relative h-64 overflow-hidden rounded-xl lg:min-h-[24rem] mt-6 mb-6 lg:mr-6 ${
                         index % 2 === 0 ? "lg:col-start-2" : "lg:col-start-1"
-                      }`}
+                      } ${service.imageWrapperClassName ?? ""}`}
                     >
                       <Image
                         src={service.image}
