@@ -1,60 +1,70 @@
-"use client";
+"use client"
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Code, Smartphone, Phone, Bot, Server } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { staggerContainer, staggerItem } from "@/utils/motionVariants";
-import webDevImage from "@/assets/web-dev.avif";
+import webDevImage from "@/assets/web-development.png";
 import mobileAppImage from "@/assets/mobile-dev.avif";
-import voiceAgentMockup from "@/assets/ai-voice-agent-crm.avif";
+import robotImage from "@/assets/robot-new.jpeg";
+import voiceAgentMockup from "@/assets/voice-agent-mockup.png";
 import devopsImage from "@/assets/devops-illustration.png";
-import roboticsDashboard from "@/assets/ai-automation.webp";
 
-const services = [
+type Service = {
+  icon: typeof Code;
+  title: string;
+  description: string;
+  image: StaticImageData;
+  features: string[];
+  imageFit?: "cover" | "contain";
+  imageWrapperClassName?: string;
+  imageClassName?: string;
+};
+
+const services: Service[] = [
   {
     icon: Code,
     title: "Mobile App Development",
     description:
       "Native and cross-platform mobile experiences crafted for performance and usability. We build apps that feel at home on every device and keep your users engaged.",
     image: mobileAppImage,
-    features: [
-      "iOS & Android",
-      "Cross-platform",
-      "App Store Launch",
-      "Offline-first UX",
-    ],
+    imageFit: "cover",
+    features: ["iOS & Android", "Cross-platform", "Offline-first UX", "App Store Launch"]
   },
   {
     icon: Smartphone,
     title: "Web Applications",
-    description: "Scalable, secure web applications tailored to your business needs. We build powerful SaaS platforms, dashboards, and internal tools that streamline operations.",
+    description:
+      "Scalable, secure web applications tailored to your business needs. We build powerful SaaS platforms, dashboards, and internal tools that streamline operations.",
     image: webDevImage,
     features: ["Real-time Features", "Cloud-native", "Secure & Compliant", "API Integration"]
   },
   {
     icon: Phone,
     title: "Voice Agent CRM",
-    description: "AI-powered voice assistants integrated with your CRM. Automate customer interactions, handle inquiries, and provide 24/7 support with natural language processing.",
+    description:
+      "AI-powered voice assistants integrated with your CRM. Automate customer interactions, handle inquiries, and provide 24/7 support with natural language processing.",
     image: voiceAgentMockup,
     features: ["24/7 Availability", "Natural Language", "CRM Integration", "Analytics Dashboard"]
   },
   {
     icon: Bot,
     title: "AI Automation Services",
-    description: "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
-    image: roboticsDashboard,
-    imageFit: "contain" as const,
-    gridTemplate: "lg:grid-cols-[1.15fr_0.85fr]",
-    imageWrapperClassName: "lg:max-w-[28rem] w-full lg:col-start-1 lg:mr-0 lg:ml-0 lg:mx-auto",
+    description:
+      "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
+    image: robotImage,
+    imageFit: "cover",
+    imageClassName: "object-center",
     features: ["Workflow Automation", "Document AI", "Predictive Analytics", "Custom Models"]
   },
   {
     icon: Server,
     title: "DevOps & Deployment",
-    description: "End-to-end DevOps solutions for seamless deployment and scaling. We set up CI/CD pipelines, cloud infrastructure, and monitoring to ensure 99.9% uptime.",
+    description:
+      "End-to-end DevOps solutions for seamless deployment and scaling. We set up CI/CD pipelines, cloud infrastructure, and monitoring to ensure 99.9% uptime.",
     image: devopsImage,
     features: ["CI/CD Pipelines", "Cloud Infrastructure", "Auto-scaling", "24/7 Monitoring"]
   }
@@ -103,12 +113,16 @@ export default function Services() {
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
               >
-                <Card className={`overflow-hidden hover:shadow-xl transition-all border-border ${
+                <Card
+                  className={`overflow-hidden hover:shadow-xl transition-all border-border ${
                   index % 2 === 0 ? "" : ""
-                }`}>
-                  <div className={`grid grid-cols-1 gap-8 ${
-                    service.gridTemplate ?? "lg:grid-cols-2"
-                  } ${index % 2 === 0 ? "" : "lg:grid-flow-dense"}`}>
+                }`}
+                >
+                  <div
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${
+                    index % 2 === 0 ? "" : "lg:grid-flow-dense"
+                  }`}
+                  >
                     {/* Content */}
                     <motion.div
                       variants={staggerItem}
@@ -139,7 +153,7 @@ export default function Services() {
                     {/* Image */}
                     <motion.div
                       variants={staggerItem}
-                      className={`relative h-64 overflow-hidden rounded-xl lg:min-h-[24rem] mt-6 mb-6 lg:mr-6 ${
+                      className={`relative h-64 overflow-hidden rounded-2xl lg:h-full lg:min-h-[24rem] ${
                         index % 2 === 0 ? "lg:col-start-2" : "lg:col-start-1"
                       } ${service.imageWrapperClassName ?? ""}`}
                     >
@@ -148,12 +162,8 @@ export default function Services() {
                         alt={service.title}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="transition-all duration-500 hover:scale-105 hover:brightness-110"
-                        style={{
-                          objectFit: service.imageFit ?? "cover",
-                          objectPosition: "center",
-                        }}
-                        unoptimized={true}
+                        className={`rounded-2xl transition-all duration-500 hover:scale-105 hover:brightness-110 ${service.imageClassName ?? ""}`}
+                        style={{ objectFit: service.imageFit ?? "cover" }}
                       />
                     </motion.div>
                   </div>

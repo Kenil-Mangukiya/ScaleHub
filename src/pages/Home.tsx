@@ -9,9 +9,9 @@ import { Card } from "@/components/ui/card";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/motionVariants";
 import heroDashboard from "@/assets/hash-dashboard.png";
 import voiceAgentMockup from "@/assets/voice-agent-mockup.png";
-import sarahPortrait from "@/assets/testimonial-sarah.jpg";
-import michaelPortrait from "@/assets/testimonial-michael.jpg";
-import emilyPortrait from "@/assets/testimonial-emily.jpg";
+import user1Portrait from "@/assets/user1.jpg";
+import user5Portrait from "@/assets/user5.jpg";
+import user7Portrait from "@/assets/user7.jpg";
 
 const features = [
   {
@@ -50,21 +50,21 @@ const testimonials = [
      role: "CEO, TechStart Inc",
      rating: 5,
     feedback: "ScaleHub helped our team cut work time by 40%! The AI automation tools are game-changers.",
-    image: sarahPortrait
+    image: user1Portrait
   },
   {
     name: "Michael Chen",
     role: "Operations Manager, GrowthCo",
     rating: 5,
     feedback: "Implementation was seamless, and the support team is outstanding. Highly recommended!",
-    image: michaelPortrait
+    image: user5Portrait
   },
   {
     name: "Emily Rodriguez",
     role: "CTO, DataFlow Systems",
     rating: 5,
     feedback: "The analytics dashboard gives us insights we never had before. ROI within 3 months!",
-    image: emilyPortrait
+    image: user7Portrait
   }
 ];
 
@@ -357,7 +357,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-secondary/20 overflow-hidden">
+      <section className="py-20 bg-secondary/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -374,21 +374,20 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="flex space-x-8 overflow-x-auto pb-8 scrollbar-hide">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <Card
                 key={index}
-                className="relative flex flex-col items-center text-center p-6 pt-14 min-w-[300px] md:min-w-[400px] border-border bg-card/90 backdrop-blur-sm"
+                className="relative flex flex-col items-center text-center p-8 pt-20 border-border bg-card/90 backdrop-blur-sm shadow-lg h-full"
               >
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2">
-                  <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-background shadow-lg">
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-background shadow-xl bg-card">
                     <Image
                       src={testimonial.image}
                       alt={`${testimonial.name} portrait`}
                       fill
-                      sizes="80px"
-                      className="object-cover"
-                      style={{ objectPosition: "top" }}
+                      sizes="96px"
+                      className="object-cover object-center"
                     />
                   </div>
                 </div>
