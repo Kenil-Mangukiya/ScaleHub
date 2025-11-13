@@ -7,11 +7,11 @@ import { Code, Smartphone, Phone, Bot, Server } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { staggerContainer, staggerItem } from "@/utils/motionVariants";
-import webDevImage from "@/assets/web-development.png";
-import mobileAppImage from "@/assets/hash-dashboard.png";
-import voiceAgentMockup from "@/assets/voice-agent-mockup.png";
+import webDevImage from "@/assets/web-dev.avif";
+import mobileAppImage from "@/assets/mobile-dev.avif";
+import voiceAgentMockup from "@/assets/ai-voice-agent-crm.avif";
 import devopsImage from "@/assets/devops-illustration.png";
-import roboticsDashboard from "@/assets/robotics-dashboard.jpg";
+import roboticsDashboard from "@/assets/ai-automation.webp";
 
 const services = [
   {
@@ -38,7 +38,7 @@ const services = [
     icon: Phone,
     title: "Voice Agent CRM",
     description: "AI-powered voice assistants integrated with your CRM. Automate customer interactions, handle inquiries, and provide 24/7 support with natural language processing.",
-    image: roboticsDashboard,
+    image: voiceAgentMockup,
     features: ["24/7 Availability", "Natural Language", "CRM Integration", "Analytics Dashboard"]
   },
   {
@@ -46,6 +46,7 @@ const services = [
     title: "AI Automation Services",
     description: "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
     image: roboticsDashboard,
+    imageFit: "contain" as const,
     features: ["Workflow Automation", "Document AI", "Predictive Analytics", "Custom Models"]
   },
   {
@@ -145,7 +146,11 @@ export default function Services() {
                         alt={service.title}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover transition-all duration-500 hover:scale-105 hover:brightness-110"
+                        className="transition-all duration-500 hover:scale-105 hover:brightness-110"
+                        style={{
+                          objectFit: service.imageFit ?? "cover",
+                          objectPosition: "center",
+                        }}
                       />
                     </motion.div>
                   </div>
