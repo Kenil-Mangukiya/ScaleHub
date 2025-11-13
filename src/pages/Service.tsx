@@ -57,7 +57,7 @@ const services: Service[] = [
       "Intelligent automation solutions that reduce manual work by up to 70%. From document processing to workflow automation, we leverage cutting-edge AI to boost efficiency.",
     image: robotImage,
     imageFit: "cover",
-    imageClassName: "object-center",
+    imageClassName: "rounded-2xl",
     features: ["Workflow Automation", "Document AI", "Predictive Analytics", "Custom Models"]
   },
   {
@@ -162,7 +162,7 @@ export default function Services() {
                         alt={service.title}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className={`rounded-2xl transition-all duration-500 hover:scale-105 hover:brightness-110 ${service.imageClassName ?? ""}`}
+                        className={`object-cover transition-all duration-500 hover:scale-105 hover:brightness-110 ${service.imageClassName ?? ""}`}
                         style={{ objectFit: service.imageFit ?? "cover" }}
                       />
                     </motion.div>

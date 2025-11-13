@@ -41,8 +41,13 @@ export default function About() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-background to-secondary/30">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/15 to-accent/10 blur-3xl" />
+          <div className="absolute right-12 top-10 h-48 w-48 rounded-full bg-primary/10 blur-2xl" />
+          <div className="absolute bottom-0 left-0 h-56 w-56 translate-y-1/2 rounded-full bg-accent/10 blur-2xl" />
+        </div>
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -51,7 +56,7 @@ export default function About() {
           >
             <motion.h1
               variants={staggerItem}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-4"
             >
               About{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -60,16 +65,22 @@ export default function About() {
             </motion.h1>
             <motion.p
               variants={staggerItem}
-              className="text-lg sm:text-xl text-muted-foreground mb-8"
+              className="text-lg sm:text-xl text-muted-foreground mb-4"
             >
-                We&apos;re a team of passionate technologists, designers, and strategists dedicated to helping businesses harness the power of AI and automation. Founded on the belief that technology should empower growth, not complicate it.
+              ScaleHub is a team of passionate technologists, designers, and AI strategists committed to helping businesses unlock the power of automation. We believe technology should accelerate growth — not complicate it.
+            </motion.p>
+            <motion.p
+              variants={staggerItem}
+              className="text-base sm:text-lg text-muted-foreground"
+            >
+              From startups to enterprises, we build intelligent solutions that simplify operations, reduce manual work, and enable teams to scale smarter, not harder.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-background border-y border-border">
+      <section className="py-14 bg-background border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
