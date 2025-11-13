@@ -151,6 +151,7 @@ export default function Services() {
                           objectFit: service.imageFit ?? "cover",
                           objectPosition: "center",
                         }}
+                        unoptimized={true}
                       />
                     </motion.div>
                   </div>
