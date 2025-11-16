@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Target, Lightbulb, Users, TrendingUp } from "lucide-react";
+import { Target, Lightbulb, Users, TrendingUp, Building2, Cpu, Bot, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { staggerContainer, staggerItem, fadeInUp } from "@/utils/motionVariants";
@@ -41,13 +41,8 @@ export default function About() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-background to-secondary/30">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-r from-primary/15 to-accent/10 blur-3xl" />
-          <div className="absolute right-12 top-10 h-48 w-48 rounded-full bg-primary/10 blur-2xl" />
-          <div className="absolute bottom-0 left-0 h-56 w-56 translate-y-1/2 rounded-full bg-accent/10 blur-2xl" />
-        </div>
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -108,24 +103,22 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-100px" }}
-              variants={fadeInUp}
+              className="relative bg-white/5 border border-white/10 rounded-2xl p-10 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full"
             >
+              <Lightbulb className="w-10 h-10 text-primary mb-4" />
+              <p className="text-primary/80 text-sm uppercase tracking-wider mb-2">Who We Are</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
                 Our Story
               </h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  ScaleHub was born out of a simple observation: businesses were drowning in manual processes while powerful AI tools remained out of reach for most teams. We set out to change that.
-                </p>
-                <p>
-                  Since our founding, we&apos;ve helped over 500 companies automate workflows, reduce operational costs, and scale faster than ever before. From startups to enterprises, our solutions adapt to your unique needs.
-                </p>
-                <p>
-                  Today, we&apos;re proud to be at the forefront of the AI automation revolution, combining expertise in software development, DevOps, and artificial intelligence to deliver solutions that truly transform businesses.
-                </p>
+              <div className="space-y-4 leading-relaxed text-muted-foreground">
+                <p>Founded in 2022, ScaleHub started because businesses were drowning in manual processes and fragmented tools. We set out to make automation accessible, reliable, and results-driven.</p>
+                <p>By 2023, we built our first automation engine and onboarded our early customers—helping the first 50 companies automate core operations and eliminate workflow bottlenecks.</p>
+                <p>In 2024, we expanded our platform with AI voice agents and analytics dashboards, enabling teams to monitor performance and optimize processes end-to-end.</p>
+                <p>In 2025, we reached 500+ global teams and continue to scale responsibly—focusing on security, usability, and measurable impact for every customer.</p>
               </div>
             </motion.div>
 
@@ -136,10 +129,51 @@ export default function About() {
               variants={fadeInUp}
               className="relative"
             >
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <p className="text-6xl font-bold text-primary mb-4">500+</p>
-                  <p className="text-xl text-foreground font-semibold">Teams Trust ScaleHub</p>
+              <div className="relative max-w-3xl mx-auto">
+                <div className="absolute left-[10px] top-0 h-full w-[3px] bg-gradient-to-b from-primary to-accent" />
+                <div className="space-y-8 pl-10">
+                  {[
+                    {
+                      year: "2022",
+                      description:
+                        "ScaleHub was founded with a mission to solve manual workflow bottlenecks.",
+                      Icon: Building2,
+                    },
+                    {
+                      year: "2023",
+                      description:
+                        "First automation engine launched; helped first 50 companies automate operations.",
+                      Icon: Cpu,
+                    },
+                    {
+                      year: "2024",
+                      description:
+                        "Expanded into AI voice automation and analytics dashboards.",
+                      Icon: Bot,
+                    },
+                    {
+                      year: "2025",
+                      description:
+                        "Trusted by 500+ businesses, serving global teams with full AI-automation suites.",
+                      Icon: Rocket,
+                    },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.year}
+                      initial={{ opacity: 0, x: 40 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.2 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
+                      <span className="absolute left-[4px] top-8 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_#2dd4bf]" />
+                      <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-lg hover:bg-white/10 transition-all">
+                        <item.Icon className="w-6 h-6 text-accent mb-3" />
+                        <h3 className="text-xl font-semibold text-foreground">{item.year}</h3>
+                        <p className="text-muted-foreground">{item.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -192,35 +226,49 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <div className="absolute inset-0 pointer-events-none hidden dark:block">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117]/95 to-[#0D1117]/80" />
+        </div>
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto"
+            className="max-w-3xl mx-auto text-center"
           >
-            <motion.h2
-              variants={staggerItem}
-              className="text-3xl sm:text-4xl font-bold text-foreground mb-6"
-            >
-              Ready to Work Together?
-            </motion.h2>
-            <motion.p
-              variants={staggerItem}
-              className="text-lg text-muted-foreground mb-8"
-            >
-              Join 500+ teams who trust ScaleHub to power their growth
-            </motion.p>
-            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild variant="hero" size="lg">
-                <Link href="/contact">Get Started</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-transform">
-                <Link href="/team">Meet Our Team</Link>
-              </Button>
-            </motion.div>
+            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/70 backdrop-blur-xl border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40">
+              <motion.h2
+                variants={staggerItem}
+                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+              >
+                Ready to Work Together?
+              </motion.h2>
+              <motion.p
+                variants={staggerItem}
+                className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+              >
+                Join 500+ teams who trust ScaleHub to power their growth
+              </motion.p>
+              <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white shadow-none hover:shadow-md hover:shadow-primary/20 transition-transform duration-300 dark:shadow-[0_0_10px_rgba(99,102,241,0.25)] dark:hover:shadow-[0_0_15px_rgba(99,102,241,0.35)] dark:hover:scale-[1.02]"
+                >
+                  <Link href="/contact">Get Started</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full px-8 py-4 border border-gray-300 dark:border-white/20 bg-white dark:bg-white/10 text-gray-800 dark:text-white transition-all duration-300 hover:bg-gray-100 hover:dark:bg-white/20"
+                >
+                  <Link href="/team">Meet Our Team</Link>
+                </Button>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>

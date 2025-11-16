@@ -12,6 +12,11 @@ import voiceAgentMockup from "@/assets/voice-agent-mockup.png";
 import user1Portrait from "@/assets/user1.jpg";
 import user5Portrait from "@/assets/user5.jpg";
 import user7Portrait from "@/assets/user7.jpg";
+import macdonaldsLogo from "@/assets/macdonalds.png";
+import mercedesLogo from "@/assets/mer2.jpg";
+import pumaLogo from "@/assets/puma2.png";
+import rolexLogo from "@/assets/rolex.jpg";
+import tataLogo from "@/assets/tata.webp";
 
 const features = [
   {
@@ -36,12 +41,12 @@ const features = [
   }
 ];
 
-const trustedLogos = [
-  "Company A",
-  "Company B",
-  "Company C",
-  "Company D",
-  "Company E"
+const companies = [
+  { name: "McDonald's", logo: macdonaldsLogo, logoClassName: "w-10 h-10" },
+  { name: "Mercedes-Benz", logo: mercedesLogo, logoClassName: "w-10 h-10" }, // 20px
+  { name: "Puma", logo: pumaLogo, logoClassName: "w-10 h-10" },
+  { name: "Rolex", logo: rolexLogo, logoClassName: "w-10 h-10" },
+  { name: "Tata", logo: tataLogo, logoClassName: "w-10 h-10" }
 ];
 
 const testimonials = [
@@ -115,11 +120,22 @@ export default function Home() {
               </motion.p>
               <motion.div
                 variants={staggerItem}
-                className="flex flex-wrap gap-6 mt-4"
+                className="flex flex-wrap gap-4 items-center mt-6 justify-center lg:justify-start"
               >
-                {trustedLogos.map((logo, index) => (
-                  <div key={index} className="px-4 py-2 bg-card rounded-lg border border-border text-sm text-muted-foreground">
-                    {logo}
+                {companies.map((company, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)]"
+                  >
+                    <Image
+                      src={company.logo}
+                      alt={company.name}
+                      width={40}
+                      height={40}
+                      className={`rounded-lg object-contain ${company.logoClassName ?? ""}`}
+                      unoptimized={true}
+                    />
+                    <span className="text-sm">{company.name}</span>
                   </div>
                 ))}
               </motion.div>
