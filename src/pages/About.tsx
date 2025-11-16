@@ -98,36 +98,17 @@ export default function About() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Timeline + Story Section (stacked on tablet with Timeline first) */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="relative bg-white/5 border border-white/10 rounded-2xl p-10 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full"
-            >
-              <Lightbulb className="w-10 h-10 text-primary mb-4" />
-              <p className="text-primary/80 text-sm uppercase tracking-wider mb-2">Who We Are</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
-                Our Story
-              </h2>
-              <div className="space-y-4 leading-relaxed text-muted-foreground">
-                <p>Founded in 2022, ScaleHub started because businesses were drowning in manual processes and fragmented tools. We set out to make automation accessible, reliable, and results-driven.</p>
-                <p>By 2023, we built our first automation engine and onboarded our early customers—helping the first 50 companies automate core operations and eliminate workflow bottlenecks.</p>
-                <p>In 2024, we expanded our platform with AI voice agents and analytics dashboards, enabling teams to monitor performance and optimize processes end-to-end.</p>
-                <p>In 2025, we reached 500+ global teams and continue to scale responsibly—focusing on security, usability, and measurable impact for every customer.</p>
-              </div>
-            </motion.div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+            {/* Timeline (first on tablet) */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
-              className="relative"
+              className="relative order-1 lg:order-1"
             >
               <div className="relative max-w-3xl mx-auto">
                 <div className="absolute left-[10px] top-0 h-full w-[3px] bg-gradient-to-b from-primary to-accent" />
@@ -175,6 +156,32 @@ export default function About() {
                     </motion.div>
                   ))}
                 </div>
+              </div>
+            </motion.div>
+
+            {/* Divider between sections on tablet to enhance flow */}
+            <div className="block lg:hidden my-10">
+              <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+            </div>
+
+            {/* Our Story (second on tablet) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="relative bg-white/5 border border-white/10 rounded-2xl p-10 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full order-2 lg:order-2"
+            >
+              <Lightbulb className="w-10 h-10 text-primary mb-4" />
+              <p className="text-primary/80 text-sm uppercase tracking-wider mb-2">Who We Are</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
+                Our Story
+              </h2>
+              <div className="space-y-4 leading-relaxed text-muted-foreground">
+                <p>Founded in 2022, ScaleHub started because businesses were drowning in manual processes and fragmented tools. We set out to make automation accessible, reliable, and results-driven.</p>
+                <p>By 2023, we built our first automation engine and onboarded our early customers—helping the first 50 companies automate core operations and eliminate workflow bottlenecks.</p>
+                <p>In 2024, we expanded our platform with AI voice agents and analytics dashboards, enabling teams to monitor performance and optimize processes end-to-end.</p>
+                <p>In 2025, we reached 500+ global teams and continue to scale responsibly—focusing on security, usability, and measurable impact for every customer.</p>
               </div>
             </motion.div>
           </div>

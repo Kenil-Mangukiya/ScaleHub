@@ -126,10 +126,12 @@ export default function Services() {
                     {/* Content */}
                     <motion.div
                       variants={staggerItem}
-                      className={`p-8 md:p-12 flex flex-col justify-center ${
+                      className={`relative p-8 md:p-12 sm:pt-8 sm:pb-8 sm:px-8 flex flex-col justify-center ${
                         index % 2 === 0 ? "lg:col-start-1" : "lg:col-start-2"
                       }`}
                     >
+                      {/* Tablet gradient left border strip */}
+                      <div className="hidden sm:block lg:hidden absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-accent" />
                       <div className="flex items-center mb-4">
                         <div className="p-3 rounded-lg bg-primary/10 mr-4">
                           <service.icon className="w-8 h-8 text-primary" />
@@ -155,7 +157,7 @@ export default function Services() {
                       variants={staggerItem}
                       className={`relative h-64 overflow-hidden rounded-2xl lg:h-full lg:min-h-[24rem] ${
                         index % 2 === 0 ? "lg:col-start-2" : "lg:col-start-1"
-                      } ${service.imageWrapperClassName ?? ""}`}
+                      } ${service.imageWrapperClassName ?? ""} sm:hidden lg:block`}
                     >
                       <Image
                         src={service.image}

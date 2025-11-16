@@ -93,14 +93,14 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden dark:block bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(255,255,255,0.12),transparent_60%)]" />
         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 block dark:hidden bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(0,0,0,0.06),transparent_60%)]" />
 
-        <div className="p-5 md:p-6 h-full flex flex-col justify-between">
+        <div className="p-5 md:p-6 sm:pt-8 sm:px-6 h-full flex flex-col justify-between">
           <div className="flex flex-col items-center text-center">
           <Image
             src={(member as any).image}
             alt={`${member.name} avatar`}
-            width={96}
-            height={96}
-            className="w-24 h-24 rounded-full object-cover border border-white/30 shadow-lg mx-auto mb-4"
+            width={88}
+            height={88}
+            className="w-20 h-20 sm:w-22 sm:h-22 rounded-full object-cover border border-white/30 shadow-lg mx-auto mb-4"
           />
 
           {/* Text */}
@@ -114,7 +114,7 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
           </div>
 
           {/* Social icons */}
-          <div className="mt-6 sm:mt-8 flex gap-3 justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+          <div className="mt-6 sm:mt-8 flex gap-3 justify-center opacity-100 translate-y-0 transition-all duration-300">
             <a
               href={member.social.linkedin}
               aria-label={`${member.name} LinkedIn`}
@@ -174,15 +174,44 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Team Grid */}
+      {/* Team Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Desktop grid */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16"
+            className="hidden lg:grid grid-cols-4 gap-8 mt-16"
+          >
+            {teamMembers.map((member) => (
+              <TeamCard key={member.name} member={member} />
+            ))}
+          </motion.div>
+
+          {/* Tablet carousel */}
+          <div className="relative hidden sm:block lg:hidden mt-16">
+            <div className="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory relative">
+              <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-background to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-background to-transparent" />
+              <div className="flex flex-nowrap gap-4 pl-4 pr-6">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="shrink-0 snap-center w-[85vw] max-w-md">
+                    <TeamCard member={member} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile grid */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 gap-8 mt-16 sm:hidden"
           >
             {teamMembers.map((member) => (
               <TeamCard key={member.name} member={member} />
