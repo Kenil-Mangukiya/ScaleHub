@@ -114,7 +114,7 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
           </div>
 
           {/* Social icons */}
-          <div className="mt-6 sm:mt-8 flex gap-3 justify-center opacity-100 translate-y-0 transition-all duration-300">
+          <div className="mt-6 sm:mt-8 flex gap-3 justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
             <a
               href={member.social.linkedin}
               aria-label={`${member.name} LinkedIn`}

@@ -22,55 +22,55 @@ const features = [
   {
     icon: BarChart3,
     title: "Real-time Analytics",
-    description: "Track your business metrics and performance with powerful real-time dashboards."
+    description: "Track your business metrics and performance with powerful real-time dashboards.",
   },
   {
     icon: Bot,
     title: "AI Automation",
-    description: "Leverage cutting-edge AI to automate workflows and increase productivity."
+    description: "Leverage cutting-edge AI to automate workflows and increase productivity.",
   },
   {
     icon: Users,
     title: "Team Collaboration",
-    description: "Work seamlessly with your team through integrated collaboration tools."
+    description: "Work seamlessly with your team through integrated collaboration tools.",
   },
   {
     icon: ShieldCheck,
     title: "Secure Cloud",
-    description: "Enterprise-grade security with encrypted data and compliance standards."
-  }
+    description: "Enterprise-grade security with encrypted data and compliance standards.",
+  },
 ];
 
 const companies = [
   { name: "McDonald's", logo: macdonaldsLogo, logoClassName: "w-10 h-10" },
-  { name: "Mercedes-Benz", logo: mercedesLogo, logoClassName: "w-10 h-10" }, // 20px
+  { name: "Mercedes-Benz", logo: mercedesLogo, logoClassName: "w-10 h-10" },
   { name: "Puma", logo: pumaLogo, logoClassName: "w-10 h-10" },
   { name: "Rolex", logo: rolexLogo, logoClassName: "w-10 h-10" },
-  { name: "Tata", logo: tataLogo, logoClassName: "w-10 h-10" }
+  { name: "Tata", logo: tataLogo, logoClassName: "w-10 h-10" },
 ];
 
 const testimonials = [
   {
-     name: "Sarah Johnson",
-     role: "CEO, TechStart Inc",
-     rating: 5,
+    name: "Sarah Johnson",
+    role: "CEO, TechStart Inc",
+    rating: 5,
     feedback: "ScaleHub helped our team cut work time by 40%! The AI automation tools are game-changers.",
-    image: user1Portrait
+    image: user1Portrait,
   },
   {
     name: "Michael Chen",
     role: "Operations Manager, GrowthCo",
     rating: 5,
     feedback: "Implementation was seamless, and the support team is outstanding. Highly recommended!",
-    image: user5Portrait
+    image: user5Portrait,
   },
   {
     name: "Emily Rodriguez",
     role: "CTO, DataFlow Systems",
     rating: 5,
     feedback: "The analytics dashboard gives us insights we never had before. ROI within 3 months!",
-    image: user7Portrait
-  }
+    image: user7Portrait,
+  },
 ];
 
 export default function Home() {
@@ -108,7 +108,12 @@ export default function Home() {
                 <Button asChild variant="hero" size="lg">
                   <Link href="/contact">Get Started</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-transform">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="hover:scale-105 transition-transform"
+                >
                   <Link href="/contact">Book a Demo</Link>
                 </Button>
               </motion.div>
@@ -118,28 +123,50 @@ export default function Home() {
               >
                 Trusted by 500+ teams worldwide
               </motion.p>
+
+              {/* Trusted companies – premium horizontal scroll on tablet */}
               <motion.div
                 variants={staggerItem}
-                className="flex flex-wrap gap-4 items-center mt-6 justify-center lg:justify-start"
+                className="mt-6 relative -mx-4 sm:-mx-6 lg:mx-0"
               >
-                {companies.map((company, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)]"
-                  >
-                    <Image
-                      src={company.logo}
-                      alt={company.name}
-                      width={40}
-                      height={40}
-                      className={`rounded-lg object-contain ${company.logoClassName ?? ""}`}
-                      unoptimized={true}
-                    />
-                    <span className="text-sm">{company.name}</span>
-                  </div>
-                ))}
+                {/* Gradient edges for scroll hint on tablet/mobile */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-background to-transparent lg:hidden" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent lg:hidden" />
+
+                <div
+                  className="
+                    flex flex-nowrap gap-4 pl-4 pr-6
+                    overflow-x-auto scroll-smooth snap-x snap-mandatory
+                    [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
+                    items-center justify-start
+                    lg:flex-wrap lg:gap-4 lg:pl-0 lg:pr-0 lg:overflow-visible lg:snap-none
+                  "
+                >
+                  {companies.map((company, index) => {
+                    const hideOnTablet = company.name === "Tata";
+                    return (
+                      <div
+                        key={index}
+                        className={`snap-center shrink-0 lg:shrink lg:snap-none flex items-center px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)] ${
+                          hideOnTablet ? "hidden lg:flex" : ""
+                        }`}
+                      >
+                        <Image
+                          src={company.logo}
+                          alt={company.name}
+                          width={40}
+                          height={40}
+                          className={`rounded-lg object-contain ${company.logoClassName ?? ""}`}
+                          unoptimized={true}
+                        />
+                        <span className="text-sm whitespace-nowrap">{company.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </motion.div>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -193,7 +220,9 @@ export default function Home() {
               <motion.div key={index} variants={staggerItem}>
                 <Card className="p-6 h-full hover:scale-105 hover:shadow-lg transition-all cursor-pointer border-border">
                   <feature.icon className="w-12 h-12 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    {feature.title}
+                  </h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </Card>
               </motion.div>
@@ -225,11 +254,22 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="
+              flex flex-nowrap gap-6
+              overflow-x-auto scroll-smooth snap-x snap-mandatory
+              [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
+              -mx-4 sm:-mx-6
+              lg:mx-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:overflow-visible lg:snap-none
+            "
           >
             <motion.div
               variants={staggerItem}
-              className="relative group h-[260px] sm:h-[320px] lg:h-[420px] overflow-hidden rounded-xl shadow-xl"
+              className="
+                relative group h-[260px] sm:h-[320px] lg:h-[420px]
+                overflow-hidden rounded-xl shadow-xl
+                snap-center shrink-0 w-[85%] sm:w-[70%] md:w-[60%]
+                lg:w-auto lg:shrink lg:snap-none
+              "
             >
               <Image
                 src={voiceAgentMockup}
@@ -241,7 +281,12 @@ export default function Home() {
             </motion.div>
             <motion.div
               variants={staggerItem}
-              className="relative group h-[260px] sm:h-[320px] lg:h-[420px] overflow-hidden rounded-xl shadow-xl"
+              className="
+                relative group h-[260px] sm:h-[320px] lg:h-[420px]
+                overflow-hidden rounded-xl shadow-xl
+                snap-center shrink-0 w-[85%] sm:w-[70%] md:w-[60%]
+                lg:w-auto lg:shrink lg:snap-none
+              "
             >
               <Image
                 src={heroDashboard}
@@ -278,13 +323,25 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            className="
+              flex flex-nowrap gap-4 pl-4 pr-6
+              overflow-x-auto scroll-smooth snap-x snap-mandatory
+              [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
+              max-w-6xl mx-auto
+              lg:grid lg:grid-cols-3 lg:gap-8 lg:pl-0 lg:pr-0 lg:overflow-visible lg:snap-none
+            "
           >
             {/* Starter */}
-            <motion.div variants={staggerItem}>
+            <motion.div
+              variants={staggerItem}
+              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
+            >
               <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Starter</h3>
-                <p className="text-4xl font-bold text-primary mb-1">$49<span className="text-lg text-muted-foreground">/mo</span></p>
+                <p className="text-4xl font-bold text-primary mb-1">
+                  $49
+                  <span className="text-lg text-muted-foreground">/mo</span>
+                </p>
                 <p className="text-muted-foreground mb-6">Perfect for small teams</p>
                 <ul className="space-y-3 mb-8 flex-1">
                   <li className="flex items-center text-sm">
@@ -307,13 +364,19 @@ export default function Home() {
             </motion.div>
 
             {/* Growth (Featured) */}
-            <motion.div variants={staggerItem}>
+            <motion.div
+              variants={staggerItem}
+              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
+            >
               <Card className="relative flex flex-col p-8 h-full border-2 border-primary hover:scale-105 hover:shadow-xl transition-all">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-sm font-medium">
                   Most Popular
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Growth</h3>
-                <p className="text-4xl font-bold text-primary mb-1">$99<span className="text-lg text-muted-foreground">/mo</span></p>
+                <p className="text-4xl font-bold text-primary mb-1">
+                  $99
+                  <span className="text-lg text-muted-foreground">/mo</span>
+                </p>
                 <p className="text-muted-foreground mb-6">For growing businesses</p>
                 <ul className="space-y-3 mb-8 flex-1">
                   <li className="flex items-center text-sm">
@@ -340,7 +403,10 @@ export default function Home() {
             </motion.div>
 
             {/* Enterprise */}
-            <motion.div variants={staggerItem}>
+            <motion.div
+              variants={staggerItem}
+              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
+            >
               <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
                 <h3 className="text-2xl font-bold text-foreground mb-2">Enterprise</h3>
                 <p className="text-4xl font-bold text-primary mb-1">Custom</p>
@@ -390,11 +456,23 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            className="
+              flex flex-nowrap gap-4 pl-4 pr-6
+              overflow-x-auto scroll-smooth snap-x snap-mandatory
+              [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
+              -mx-4 sm:-mx-6
+              lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:snap-none
+            "
+          >
             {testimonials.map((testimonial, index) => (
               <Card
                 key={index}
-                className="relative flex flex-col items-center text-center p-8 pt-20 border-border bg-card/90 backdrop-blur-sm shadow-lg h-full"
+                className="
+                  relative flex flex-col items-center text-center p-8 pt-20 border-border bg-card/90 backdrop-blur-sm shadow-lg h-full
+                  snap-center shrink-0 w-[80%] sm:w-[70%] md:w-[60%]
+                  lg:w-auto lg:shrink lg:snap-none
+                "
               >
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2">
                   <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-background shadow-xl bg-card">
@@ -409,7 +487,9 @@ export default function Home() {
                 </div>
                 <div className="flex items-center justify-center mb-3 text-accent">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-lg">★</span>
+                    <span key={i} className="text-lg">
+                      ★
+                    </span>
                   ))}
                 </div>
                 <p className="text-foreground mb-4 italic">
