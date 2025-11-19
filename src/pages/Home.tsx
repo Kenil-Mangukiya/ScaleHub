@@ -1,9 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { BarChart3, Bot, Users, ShieldCheck, TrendingUp, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  BarChart3,
+  Bot,
+  Users,
+  ShieldCheck,
+  TrendingUp,
+  Zap,
+  ChevronDown,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { fadeInUp, staggerContainer, staggerItem } from "@/utils/motionVariants";
@@ -22,7 +31,8 @@ const features = [
   {
     icon: BarChart3,
     title: "Real-time Analytics",
-    description: "Track your business metrics and performance with powerful real-time dashboards.",
+    description:
+      "Track your business metrics and performance with powerful real-time dashboards.",
   },
   {
     icon: Bot,
@@ -32,12 +42,14 @@ const features = [
   {
     icon: Users,
     title: "Team Collaboration",
-    description: "Work seamlessly with your team through integrated collaboration tools.",
+    description:
+      "Work seamlessly with your team through integrated collaboration tools.",
   },
   {
     icon: ShieldCheck,
     title: "Secure Cloud",
-    description: "Enterprise-grade security with encrypted data and compliance standards.",
+    description:
+      "Enterprise-grade security with encrypted data and compliance standards.",
   },
 ];
 
@@ -54,26 +66,64 @@ const testimonials = [
     name: "Sarah Johnson",
     role: "CEO, TechStart Inc",
     rating: 5,
-    feedback: "ScaleHub helped our team cut work time by 40%! The AI automation tools are game-changers.",
+    feedback:
+      "ScaleHub helped our team cut work time by 40%! The AI automation tools are game-changers.",
     image: user1Portrait,
   },
   {
     name: "Michael Chen",
     role: "Operations Manager, GrowthCo",
     rating: 5,
-    feedback: "Implementation was seamless, and the support team is outstanding. Highly recommended!",
+    feedback:
+      "Implementation was seamless, and the support team is outstanding. Highly recommended!",
     image: user5Portrait,
   },
   {
     name: "Emily Rodriguez",
     role: "CTO, DataFlow Systems",
     rating: 5,
-    feedback: "The analytics dashboard gives us insights we never had before. ROI within 3 months!",
+    feedback:
+      "The analytics dashboard gives us insights we never had before. ROI within 3 months!",
     image: user7Portrait,
   },
 ];
 
+// Pricing data for both desktop and mobile accordion
+const pricingPlans = [
+  {
+    id: "starter",
+    name: "Starter",
+    price: "$49",
+    period: "/mo",
+    description: "Perfect for small teams",
+    features: ["Up to 5 users", "Basic automation", "Standard analytics"],
+    ctaLabel: "Get Started",
+  },
+  {
+    id: "growth",
+    name: "Growth",
+    price: "$99",
+    period: "/mo",
+    description: "For growing businesses",
+    features: ["Up to 20 users", "Advanced automation", "Premium analytics", "AI integrations"],
+    ctaLabel: "Get Started",
+    badge: "Most Popular",
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    price: "Custom",
+    period: "",
+    description: "Tailored for enterprises",
+    features: ["Unlimited users", "Custom automation", "Custom analytics", "Dedicated support"],
+    ctaLabel: "Contact Sales",
+  },
+];
+
 export default function Home() {
+  // which pricing accordion is open on mobile
+  const [openPlanId, setOpenPlanId] = useState<string | null>("growth");
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -124,7 +174,7 @@ export default function Home() {
                 Trusted by 500+ teams worldwide
               </motion.p>
 
-              {/* Trusted companies – premium horizontal scroll on tablet */}
+              {/* Trusted companies – keep scroll behavior, same as before */}
               <motion.div
                 variants={staggerItem}
                 className="mt-6 relative -mx-4 sm:-mx-6 lg:mx-0"
@@ -156,7 +206,9 @@ export default function Home() {
                           alt={company.name}
                           width={40}
                           height={40}
-                          className={`rounded-lg object-contain ${company.logoClassName ?? ""}`}
+                          className={`rounded-lg object-contain ${
+                            company.logoClassName ?? ""
+                          }`}
                           unoptimized={true}
                         />
                         <span className="text-sm whitespace-nowrap">{company.name}</span>
@@ -231,7 +283,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Product Showcase */}
+      {/* Product Showcase – mobile: only first image, tablet/desktop: both as before */}
       <section className="py-20 bg-secondary/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -249,13 +301,36 @@ export default function Home() {
             </p>
           </motion.div>
 
+          {/* MOBILE: show only first image, no scroll */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="sm:hidden"
+          >
+            <motion.div
+              variants={staggerItem}
+              className="relative h-[260px] overflow-hidden rounded-xl shadow-xl"
+            >
+              <Image
+                src={voiceAgentMockup}
+                alt="Voice Agent CRM Interface"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* TABLET & DESKTOP: keep original two-image scroll/grid behavior */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
             className="
-              flex flex-nowrap gap-6
+              hidden sm:flex sm:flex-nowrap gap-6
               overflow-x-auto scroll-smooth snap-x snap-mandatory
               [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
               -mx-4 sm:-mx-6
@@ -318,122 +393,174 @@ export default function Home() {
             </p>
           </motion.div>
 
+          {/* MOBILE: vertical accordion, one open at a time */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+            className="space-y-4 sm:hidden"
+          >
+            {pricingPlans.map((plan) => {
+              const isOpen = openPlanId === plan.id;
+              const isGrowth = plan.id === "growth";
+              const isEnterprise = plan.id === "enterprise";
+
+              return (
+                <motion.div key={plan.id} variants={staggerItem}>
+                  <Card
+                    className={`p-6 border ${
+                      isGrowth ? "border-primary/70 shadow-xl" : "border-border shadow-md"
+                    } bg-card/90`}
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
+                        <p className="mt-1 text-2xl font-semibold text-primary">
+                          {plan.price}
+                          {plan.period && (
+                            <span className="text-sm text-muted-foreground ml-1">
+                              {plan.period}
+                            </span>
+                          )}
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {plan.description}
+                        </p>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        {plan.badge && (
+                          <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-sm">
+                            {plan.badge}
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setOpenPlanId(isOpen ? null : plan.id)
+                          }
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-primary/40 text-xs font-medium text-primary bg-primary/5 hover:bg-primary/10 transition"
+                        >
+                          {isOpen ? "Hide details" : "View details"}
+                          <ChevronDown
+                            className={`w-3 h-3 transition-transform ${
+                              isOpen ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="content"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="mt-4 space-y-2 text-sm text-foreground">
+                            {plan.features.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-center gap-2"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <Button
+                            asChild
+                            size="sm"
+                            variant={isEnterprise ? "outline" : "hero"}
+                            className="mt-5 w-full"
+                          >
+                            <Link href="/contact">{plan.ctaLabel}</Link>
+                          </Button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* TABLET & DESKTOP: original scroll / grid layout */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
             className="
-              flex flex-nowrap gap-4 pl-4 pr-6
+              hidden sm:flex sm:flex-nowrap gap-4 pl-4 pr-6
               overflow-x-auto scroll-smooth snap-x snap-mandatory
               [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
               max-w-6xl mx-auto
               lg:grid lg:grid-cols-3 lg:gap-8 lg:pl-0 lg:pr-0 lg:overflow-visible lg:snap-none
             "
           >
-            {/* Starter */}
-            <motion.div
-              variants={staggerItem}
-              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
-            >
-              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
-                <h3 className="text-2xl font-bold text-foreground mb-2">Starter</h3>
-                <p className="text-4xl font-bold text-primary mb-1">
-                  $49
-                  <span className="text-lg text-muted-foreground">/mo</span>
-                </p>
-                <p className="text-muted-foreground mb-6">Perfect for small teams</p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  <li className="flex items-center text-sm">
-                    <TrendingUp className="w-4 h-4 text-accent mr-2" />
-                    Up to 5 users
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <Zap className="w-4 h-4 text-accent mr-2" />
-                    Basic automation
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <BarChart3 className="w-4 h-4 text-accent mr-2" />
-                    Standard analytics
-                  </li>
-                </ul>
-                <Button asChild variant="outline" className="w-full mt-auto">
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </Card>
-            </motion.div>
+            {pricingPlans.map((plan) => {
+              const isGrowth = plan.id === "growth";
+              const isEnterprise = plan.id === "enterprise";
 
-            {/* Growth (Featured) */}
-            <motion.div
-              variants={staggerItem}
-              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
-            >
-              <Card className="relative flex flex-col p-8 h-full border-2 border-primary hover:scale-105 hover:shadow-xl transition-all">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">Growth</h3>
-                <p className="text-4xl font-bold text-primary mb-1">
-                  $99
-                  <span className="text-lg text-muted-foreground">/mo</span>
-                </p>
-                <p className="text-muted-foreground mb-6">For growing businesses</p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  <li className="flex items-center text-sm">
-                    <TrendingUp className="w-4 h-4 text-accent mr-2" />
-                    Up to 20 users
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <Zap className="w-4 h-4 text-accent mr-2" />
-                    Advanced automation
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <BarChart3 className="w-4 h-4 text-accent mr-2" />
-                    Premium analytics
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <Bot className="w-4 h-4 text-accent mr-2" />
-                    AI integrations
-                  </li>
-                </ul>
-                <Button asChild variant="hero" className="w-full mt-auto">
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </Card>
-            </motion.div>
-
-            {/* Enterprise */}
-            <motion.div
-              variants={staggerItem}
-              className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
-            >
-              <Card className="p-8 h-full border-border hover:scale-105 hover:shadow-xl transition-all flex flex-col">
-                <h3 className="text-2xl font-bold text-foreground mb-2">Enterprise</h3>
-                <p className="text-4xl font-bold text-primary mb-1">Custom</p>
-                <p className="text-muted-foreground mb-6">Tailored for enterprises</p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  <li className="flex items-center text-sm">
-                    <TrendingUp className="w-4 h-4 text-accent mr-2" />
-                    Unlimited users
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <Zap className="w-4 h-4 text-accent mr-2" />
-                    Custom automation
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <BarChart3 className="w-4 h-4 text-accent mr-2" />
-                    Custom analytics
-                  </li>
-                  <li className="flex items-center text-sm">
-                    <ShieldCheck className="w-4 h-4 text-accent mr-2" />
-                    Dedicated support
-                  </li>
-                </ul>
-                <Button asChild variant="outline" className="w-full mt-auto">
-                  <Link href="/contact">Contact Sales</Link>
-                </Button>
-              </Card>
-            </motion.div>
+              return (
+                <motion.div
+                  key={plan.id}
+                  variants={staggerItem}
+                  className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
+                >
+                  <Card
+                    className={`h-full flex flex-col p-8 transition-all ${
+                      isGrowth
+                        ? "relative border-2 border-primary hover:scale-105 hover:shadow-xl"
+                        : "border-border hover:scale-105 hover:shadow-xl"
+                    }`}
+                  >
+                    {plan.badge && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-sm font-medium">
+                        {plan.badge}
+                      </div>
+                    )}
+                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                      {plan.name}
+                    </h3>
+                    <p className="text-4xl font-bold text-primary mb-1">
+                      {plan.price}
+                      {plan.period && (
+                        <span className="text-lg text-muted-foreground">
+                          {plan.period}
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-muted-foreground mb-6">
+                      {plan.description}
+                    </p>
+                    <ul className="space-y-3 mb-8 flex-1 text-sm">
+                      {plan.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-center text-sm"
+                        >
+                          <Zap className="w-4 h-4 text-accent mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      asChild
+                      variant={isEnterprise ? "outline" : isGrowth ? "hero" : "outline"}
+                      className="w-full mt-auto"
+                    >
+                      <Link href="/contact">{plan.ctaLabel}</Link>
+                    </Button>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -456,9 +583,36 @@ export default function Home() {
             </p>
           </motion.div>
 
+          {/* MOBILE: 2 quote cards, no avatars, vertical */}
+          <div className="space-y-6 sm:hidden">
+            {testimonials.slice(0, 2).map((testimonial, index) => (
+              <Card key={index} className="p-6 bg-card/90 shadow-lg">
+                <div className="flex items-center gap-1 text-accent mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-sm">
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <p className="italic text-sm text-foreground mb-4">
+                  &ldquo;{testimonial.feedback}&rdquo;
+                </p>
+                <div>
+                  <p className="font-semibold text-sm text-foreground">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* TABLET & DESKTOP: keep original scrolling card layout */}
           <div
             className="
-              flex flex-nowrap gap-4 pl-4 pr-6
+              hidden sm:flex sm:flex-nowrap gap-4 pl-4 pr-6
               overflow-x-auto scroll-smooth snap-x snap-mandatory
               [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
               -mx-4 sm:-mx-6
@@ -496,8 +650,12 @@ export default function Home() {
                   &ldquo;{testimonial.feedback}&rdquo;
                 </p>
                 <div className="w-full border-t border-border pt-4">
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <p className="font-semibold text-foreground">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </p>
                 </div>
               </Card>
             ))}

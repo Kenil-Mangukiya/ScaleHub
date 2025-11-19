@@ -28,7 +28,8 @@ export const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            {/* Mobile: horizontal layout */}
+            <ul className="flex flex-wrap gap-3 md:flex-col md:space-y-2 md:gap-0">
               <li>
                 <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Home
