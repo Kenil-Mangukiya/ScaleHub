@@ -39,7 +39,7 @@ const stats = [
 
 export default function About() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Hero Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +75,7 @@ export default function About() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-14 bg-background border-y border-border">
+      <section className="pt-14 pb-6 sm:pb-14 bg-background border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -99,20 +99,26 @@ export default function About() {
       </section>
 
       {/* Timeline + Story Section (stacked on tablet with Timeline first) */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+      <section className="pt-4 pb-12 sm:pt-8 sm:pb-16 lg:py-20 bg-background overflow-x-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
+          {/* Mobile: Section Header */}
+          <div className="mb-6 sm:mb-8 lg:hidden flex items-center justify-center min-h-[60px] sm:min-h-[80px]">
+            <h2 className="text-3xl mt-6 sm:text-4xl font-bold text-white text-center">Our Journey</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start max-w-6xl mx-auto">
             {/* Timeline (first on tablet) */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
-              className="relative order-1 lg:order-1"
+              className="relative order-1 lg:order-1 w-full overflow-x-hidden"
             >
-              <div className="relative max-w-3xl mx-auto">
-                <div className="absolute left-[10px] top-0 h-full w-[3px] bg-gradient-to-b from-primary to-accent" />
-                <div className="space-y-8 pl-10">
+              <div className="relative w-full max-w-full">
+                {/* Mobile: Thinner line, Desktop: Original */}
+                <div className="absolute left-[8px] sm:left-[10px] top-0 h-full w-[2px] sm:w-[3px] bg-gradient-to-b from-primary to-accent" />
+                <div className="space-y-4 sm:space-y-6 lg:space-y-8 pl-6 sm:pl-8 lg:pl-10 w-full">
                   {[
                     {
                       year: "2022",
@@ -147,11 +153,12 @@ export default function About() {
                       viewport={{ once: true }}
                       className="relative"
                     >
-                      <span className="absolute left-[4px] top-8 w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_#2dd4bf]" />
-                      <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-lg hover:bg-white/10 transition-all">
-                        <item.Icon className="w-6 h-6 text-accent mb-3" />
-                        <h3 className="text-xl font-semibold text-foreground">{item.year}</h3>
-                        <p className="text-muted-foreground">{item.description}</p>
+                      {/* Mobile: Smaller marker, Desktop: Original */}
+                      <span className="absolute left-[2px] sm:left-[4px] top-6 sm:top-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-accent shadow-[0_0_10px_#2dd4bf] sm:shadow-[0_0_15px_#2dd4bf]" />
+                      <div className="bg-white/5 backdrop-blur-md rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6 border border-white/10 shadow-md sm:shadow-lg hover:bg-white/10 transition-all w-full max-w-full overflow-hidden">
+                        <item.Icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent mb-2 sm:mb-3" />
+                        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{item.year}</h3>
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed break-words">{item.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -159,8 +166,8 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Divider between sections on tablet to enhance flow */}
-            <div className="block lg:hidden my-10">
+            {/* Divider between sections on mobile/tablet */}
+            <div className="block lg:hidden my-8 sm:my-10">
               <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-border to-transparent" />
             </div>
 
@@ -170,18 +177,18 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="relative bg-white/5 border border-white/10 rounded-2xl p-10 shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full order-2 lg:order-2"
+              className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg sm:shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[3px] sm:before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full order-2 lg:order-2 w-full overflow-hidden"
             >
-              <Lightbulb className="w-10 h-10 text-primary mb-4" />
-              <p className="text-primary/80 text-sm uppercase tracking-wider mb-2">Who We Are</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
+              <Lightbulb className="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3 sm:mb-4" />
+              <p className="text-primary/80 text-xs sm:text-sm uppercase tracking-wider mb-2">Who We Are</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
                 Our Story
               </h2>
-              <div className="space-y-4 leading-relaxed text-muted-foreground">
-                <p>Founded in 2022, ScaleHub started because businesses were drowning in manual processes and fragmented tools. We set out to make automation accessible, reliable, and results-driven.</p>
-                <p>By 2023, we built our first automation engine and onboarded our early customers—helping the first 50 companies automate core operations and eliminate workflow bottlenecks.</p>
-                <p>In 2024, we expanded our platform with AI voice agents and analytics dashboards, enabling teams to monitor performance and optimize processes end-to-end.</p>
-                <p>In 2025, we reached 500+ global teams and continue to scale responsibly—focusing on security, usability, and measurable impact for every customer.</p>
+              <div className="space-y-3 sm:space-y-4 leading-relaxed text-sm sm:text-base text-muted-foreground">
+                <p className="break-words">Founded in 2022, ScaleHub started because businesses were drowning in manual processes and fragmented tools. We set out to make automation accessible, reliable, and results-driven.</p>
+                <p className="break-words">By 2023, we built our first automation engine and onboarded our early customers—helping the first 50 companies automate core operations and eliminate workflow bottlenecks.</p>
+                <p className="break-words">In 2024, we expanded our platform with AI voice agents and analytics dashboards, enabling teams to monitor performance and optimize processes end-to-end.</p>
+                <p className="break-words">In 2025, we reached 500+ global teams and continue to scale responsibly—focusing on security, usability, and measurable impact for every customer.</p>
               </div>
             </motion.div>
           </div>
