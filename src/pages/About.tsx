@@ -60,13 +60,13 @@ export default function About() {
             </motion.h1>
             <motion.p
               variants={staggerItem}
-              className="text-lg sm:text-xl text-muted-foreground mb-4"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-0 sm:mb-4 leading-relaxed"
             >
               ScaleHub is a team of passionate technologists, designers, and AI strategists committed to helping businesses unlock the power of automation. We believe technology should accelerate growth — not complicate it.
             </motion.p>
             <motion.p
               variants={staggerItem}
-              className="text-base sm:text-lg text-muted-foreground"
+              className="hidden sm:block text-base sm:text-lg text-muted-foreground"
             >
               From startups to enterprises, we build intelligent solutions that simplify operations, reduce manual work, and enable teams to scale smarter, not harder.
             </motion.p>
