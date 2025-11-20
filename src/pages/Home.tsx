@@ -193,10 +193,13 @@ export default function Home() {
                   "
                 >
                   {companies.map((company, index) => {
+                    const hideOnTablet = company.name === "Tata";
                     return (
                       <div
                         key={index}
-                        className="snap-center shrink-0 lg:shrink lg:snap-none flex items-center px-2.5 py-2 md:px-5 md:py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-2 md:gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)]"
+                        className={`snap-center shrink-0 lg:shrink lg:snap-none flex items-center px-2.5 py-2 md:px-5 md:py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-2 md:gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)] ${
+                          hideOnTablet ? "flex md:hidden lg:flex" : ""
+                        }`}
                       >
                         <Image
                           src={company.logo}
@@ -279,7 +282,7 @@ export default function Home() {
       </section>
 
       {/* Product Showcase – mobile: only first image, tablet/desktop: both as before */}
-      <section className="py-20 bg-secondary/20">
+      <section className="py-20 bg-secondary/20 md:ml-6 lg:ml-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -325,20 +328,22 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
             className="
-              hidden sm:flex sm:flex-nowrap gap-6
+              hidden sm:flex sm:flex-nowrap gap-4
               overflow-x-auto scroll-smooth snap-x snap-mandatory
               [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
               -mx-4 sm:-mx-6
-              lg:mx-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:overflow-visible lg:snap-none
+              md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:snap-none
+              lg:gap-8
             "
           >
             <motion.div
               variants={staggerItem}
               className="
-                relative group h-[260px] sm:h-[320px] lg:h-[420px]
+                relative group h-[260px] sm:h-[320px] md:h-[280px] lg:h-[420px]
                 overflow-hidden rounded-xl shadow-xl
-                snap-center shrink-0 w-[85%] sm:w-[70%] md:w-[60%]
-                lg:w-auto lg:shrink lg:snap-none
+                snap-center shrink-0 w-[85%] sm:w-[70%]
+                md:w-auto md:shrink md:snap-none
+                lg:snap-none
               "
             >
               <Image
@@ -346,16 +351,17 @@ export default function Home() {
                 alt="Voice Agent CRM Interface"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="(min-width: 768px) 45vw, (min-width: 1024px) 40vw, 100vw"
               />
             </motion.div>
             <motion.div
               variants={staggerItem}
               className="
-                relative group h-[260px] sm:h-[320px] lg:h-[420px]
+                relative group h-[260px] sm:h-[320px] md:h-[280px] lg:h-[420px]
                 overflow-hidden rounded-xl shadow-xl
-                snap-center shrink-0 w-[85%] sm:w-[70%] md:w-[60%]
-                lg:w-auto lg:shrink lg:snap-none
+                snap-center shrink-0 w-[85%] sm:w-[70%]
+                md:w-auto md:shrink md:snap-none
+                lg:snap-none
               "
             >
               <Image
@@ -363,7 +369,7 @@ export default function Home() {
                 alt="Analytics Dashboard"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-110"
-                sizes="(min-width: 1024px) 40vw, 100vw"
+                sizes="(min-width: 768px) 45vw, (min-width: 1024px) 40vw, 100vw"
               />
             </motion.div>
           </motion.div>
@@ -388,13 +394,13 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* MOBILE: vertical accordion, one open at a time */}
+          {/* MOBILE & TABLET: vertical accordion, one open at a time */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerContainer}
-            className="space-y-4 sm:hidden"
+            className="space-y-4 lg:hidden"
           >
             {pricingPlans.map((plan) => {
               const isOpen = openPlanId === plan.id;
@@ -490,18 +496,14 @@ export default function Home() {
             })}
           </motion.div>
 
-          {/* TABLET & DESKTOP: original scroll / grid layout */}
+          {/* DESKTOP: original scroll / grid layout */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
             className="
-              hidden sm:flex sm:flex-nowrap gap-4 pl-4 pr-6
-              overflow-x-auto scroll-smooth snap-x snap-mandatory
-              [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
-              max-w-6xl mx-auto
-              lg:grid lg:grid-cols-3 lg:gap-8 lg:pl-0 lg:pr-0 lg:overflow-visible lg:snap-none
+              hidden lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible
             "
           >
             {pricingPlans.map((plan) => {
@@ -512,7 +514,6 @@ export default function Home() {
                 <motion.div
                   key={plan.id}
                   variants={staggerItem}
-                  className="snap-center shrink-0 w-[80%] sm:w-[65%] md:w-[55%] lg:w-auto lg:shrink lg:snap-none"
                 >
                   <Card
                     className={`h-full flex flex-col p-8 transition-all ${
@@ -585,7 +586,7 @@ export default function Home() {
           </motion.div>
 
           {/* MOBILE: 2 quote cards, no avatars, vertical */}
-          <div className="space-y-6 sm:hidden">
+          <div className="space-y-6 md:hidden">
             {testimonials.slice(0, 2).map((testimonial, index) => (
               <Card key={index} className="p-6 bg-card/90 shadow-lg">
                 <div className="flex items-center gap-1 text-accent mb-3">
@@ -610,14 +611,53 @@ export default function Home() {
             ))}
           </div>
 
-          {/* TABLET & DESKTOP: keep original scrolling card layout */}
+          {/* TABLET: 2 testimonials with image on left, vertically centered */}
+          <div className="hidden md:block lg:hidden space-y-6">
+            {testimonials.slice(0, 2).map((testimonial, index) => (
+              <Card key={index} className="p-6 bg-card/90 shadow-lg">
+                <div className="flex items-center gap-6">
+                  {/* Image on left, vertically centered */}
+                  <div className="flex-shrink-0">
+                    <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-background shadow-lg bg-card">
+                      <Image
+                        src={testimonial.image}
+                        alt={`${testimonial.name} portrait`}
+                        fill
+                        sizes="112px"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  </div>
+                  {/* Content on right */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-1 text-accent mb-3">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <span key={i} className="text-base">
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <p className="italic text-base text-foreground mb-4">
+                      &ldquo;{testimonial.feedback}&rdquo;
+                    </p>
+                    <div>
+                      <p className="font-semibold text-base text-foreground">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* DESKTOP: keep original grid layout */}
           <div
             className="
-              hidden sm:flex sm:flex-nowrap gap-4 pl-4 pr-6
-              overflow-x-auto scroll-smooth snap-x snap-mandatory
-              [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
-              -mx-4 sm:-mx-6
-              lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:snap-none
+              hidden lg:grid lg:grid-cols-3 lg:gap-8 lg:overflow-visible
             "
           >
             {testimonials.map((testimonial, index) => (
@@ -625,8 +665,6 @@ export default function Home() {
                 key={index}
                 className="
                   relative flex flex-col items-center text-center p-8 pt-20 border-border bg-card/90 backdrop-blur-sm shadow-lg h-full
-                  snap-center shrink-0 w-[80%] sm:w-[70%] md:w-[60%]
-                  lg:w-auto lg:shrink lg:snap-none
                 "
               >
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2">

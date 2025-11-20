@@ -57,8 +57,8 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">
-                <a href="mailto:kenil.mangukiya.work@gmail.com" className="hover:text-primary transition-colors">
+              <li className="text-sm text-muted-foreground break-words">
+                <a href="mailto:kenil.mangukiya.work@gmail.com" className="hover:text-primary transition-colors break-words">
                   kenil.mangukiya.work@gmail.com
                 </a>
               </li>
