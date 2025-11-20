@@ -178,7 +178,7 @@ export default function Services() {
 
       {/* CTA Section */}
       <section className="relative overflow-hidden py-16 md:py-20">
-        <div className="absolute inset-0 pointer-events-none hidden dark:block">
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117]/95 to-[#0D1117]/80" />
         </div>
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
@@ -189,23 +189,23 @@ export default function Services() {
             variants={staggerContainer}
             className="max-w-3xl mx-auto text-center"
           >
-            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/70 backdrop-blur-xl border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40">
+            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/40">
             <motion.h2
               variants={staggerItem}
-                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+                className="text-3xl md:text-4xl font-bold text-white mb-6"
             >
               Ready to Transform Your Business?
             </motion.h2>
             <motion.p
               variants={staggerItem}
-                className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+                className="text-lg text-gray-300 mb-8"
             >
               Let&apos;s discuss how our services can accelerate your growth
             </motion.p>
               <motion.div variants={staggerItem} className="flex items-center justify-center">
                 <Link
                   href="/contact"
-                  className="rounded-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-none hover:shadow-md hover:shadow-primary/20 transition-transform duration-300 dark:shadow-[0_0_10px_rgba(99,102,241,0.25)] dark:hover:shadow-[0_0_15px_rgba(99,102,241,0.35)] dark:hover:scale-[1.02] inline-flex items-center justify-center"
+                  className="rounded-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-[0_0_10px_rgba(99,102,241,0.25)] hover:shadow-[0_0_15px_rgba(99,102,241,0.35)] hover:scale-[1.02] transition-transform duration-300 inline-flex items-center justify-center"
                 >
                   Get Started Today
                 </Link>

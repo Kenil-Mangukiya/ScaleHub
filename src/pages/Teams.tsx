@@ -88,10 +88,9 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
     <motion.div variants={fadeInUp}>
       <div
         onMouseMove={handleMouseMove}
-        className="group relative min-h-[420px] md:min-h-[460px] rounded-2xl border border-gray-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/30"
+        className="group relative min-h-[420px] md:min-h-[460px] rounded-2xl border border-white/10 bg-white/5 shadow-xl shadow-black/40 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/30"
       >
-        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden dark:block bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(255,255,255,0.12),transparent_60%)]" />
-        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 block dark:hidden bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(0,0,0,0.06),transparent_60%)]" />
+        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_var(--x)_var(--y),rgba(255,255,255,0.12),transparent_60%)]" />
 
         <div className="p-5 md:p-6 sm:pt-8 sm:px-6 h-full flex flex-col justify-between">
           <div className="flex flex-col items-center text-center">
@@ -105,10 +104,10 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
 
           {/* Text */}
           <div className="mt-3 w-full">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-foreground">{member.name}</h3>
-            <p className="text-sm text-gray-600 dark:text-muted-foreground mb-2">{member.role}</p>
-            <div className="border-t border-gray-200 dark:border-white/10 mt-3 pt-3">
-              <p className="text-xs text-gray-700 dark:text-muted-foreground leading-relaxed">{member.bio}</p>
+            <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
+            <p className="text-sm text-muted-foreground mb-2">{member.role}</p>
+            <div className="border-t border-white/10 mt-3 pt-3">
+              <p className="text-xs text-muted-foreground leading-relaxed">{member.bio}</p>
             </div>
           </div>
           </div>
@@ -118,21 +117,21 @@ const TeamCard = ({ member }: { member: (typeof teamMembers)[number] }) => {
             <a
               href={member.social.linkedin}
               aria-label={`${member.name} LinkedIn`}
-              className="p-2 rounded-full transition bg-black/5 hover:bg-black/10 shadow-sm hover:shadow-md dark:bg-white/10 dark:hover:bg-white/20 dark:shadow-white/10"
+              className="p-2 rounded-full transition bg-white/10 hover:bg-white/20 shadow-white/10 shadow-sm hover:shadow-md"
             >
               <Linkedin className="h-5 w-5 text-foreground" />
             </a>
             <a
               href={member.social.twitter}
               aria-label={`${member.name} Twitter`}
-              className="p-2 rounded-full transition bg-black/5 hover:bg-black/10 shadow-sm hover:shadow-md dark:bg-white/10 dark:hover:bg-white/20 dark:shadow-white/10"
+              className="p-2 rounded-full transition bg-white/10 hover:bg-white/20 shadow-white/10 shadow-sm hover:shadow-md"
             >
               <Twitter className="h-5 w-5 text-foreground" />
             </a>
             <a
               href={member.social.github}
               aria-label={`${member.name} GitHub`}
-              className="p-2 rounded-full transition bg-black/5 hover:bg-black/10 shadow-sm hover:shadow-md dark:bg-white/10 dark:hover:bg-white/20 dark:shadow-white/10"
+              className="p-2 rounded-full transition bg-white/10 hover:bg-white/20 shadow-white/10 shadow-sm hover:shadow-md"
             >
               <Github className="h-5 w-5 text-foreground" />
             </a>
@@ -222,7 +221,7 @@ export default function Team() {
 
       {/* Join CTA */}
       <section className="relative overflow-hidden py-16 md:py-20">
-        <div className="absolute inset-0 pointer-events-none hidden dark:block">
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117]/95 to-[#0D1117]/80" />
         </div>
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
@@ -233,23 +232,23 @@ export default function Team() {
             variants={staggerContainer}
             className="max-w-3xl mx-auto text-center"
           >
-            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/70 backdrop-blur-xl border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40">
+            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/40">
               <motion.h2
                 variants={staggerItem}
-                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+                className="text-3xl md:text-4xl font-bold text-white mb-6"
               >
                 Want to Join the Team?
               </motion.h2>
               <motion.p
                 variants={staggerItem}
-                className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+                className="text-lg text-gray-300 mb-8"
               >
                 We&apos;re always looking for talented individuals who share our passion for innovation and excellence. Reach out to explore opportunities.
               </motion.p>
               <motion.div variants={staggerItem} className="flex justify-center">
                 <Link
                   href="/contact"
-                  className="rounded-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white shadow-none hover:shadow-md hover:shadow-primary/20 transition-transform duration-300 dark:shadow-[0_0_10px_rgba(99,102,241,0.25)] dark:hover:shadow-[0_0_15px_rgba(99,102,241,0.35)] dark:hover:scale-[1.02]"
+                  className="rounded-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white shadow-[0_0_10px_rgba(99,102,241,0.25)] hover:shadow-[0_0_15px_rgba(99,102,241,0.35)] hover:scale-[1.02] transition-transform duration-300"
                 >
                   Get in Touch
                 </Link>

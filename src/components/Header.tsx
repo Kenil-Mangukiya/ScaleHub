@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "./ui/button";
 import scalehubLogo from "@/assets/scalehub-logo.png";
 
@@ -49,9 +48,8 @@ export const Header = () => {
             ))}
           </div>
 
-          {/* Desktop CTA & Theme Toggle */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeToggle />
             <Button asChild variant="default" className="hover:scale-105 transition-transform">
               <Link href="/contact">Get Started</Link>
             </Button>
@@ -59,7 +57,6 @@ export const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center space-x-2 md:hidden">
-            <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg hover:bg-secondary transition-colors"
