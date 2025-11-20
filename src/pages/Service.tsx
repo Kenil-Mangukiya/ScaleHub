@@ -74,7 +74,7 @@ export default function Services() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30">
+      <section className="py-12 sm:py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -102,9 +102,9 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-background">
+      <section className="py-12 sm:py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-16">
+          <div className="space-y-8 sm:space-y-16">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -119,35 +119,35 @@ export default function Services() {
                 }`}
                 >
                   <div
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 ${
                     index % 2 === 0 ? "" : "lg:grid-flow-dense"
                   }`}
                   >
                     {/* Content */}
                     <motion.div
                       variants={staggerItem}
-                      className={`relative p-8 md:p-12 sm:pt-8 sm:pb-8 sm:px-8 flex flex-col justify-center ${
+                      className={`relative p-6 sm:p-8 md:p-12 flex flex-col justify-center ${
                         index % 2 === 0 ? "lg:col-start-1" : "lg:col-start-2"
                       }`}
                     >
                       {/* Tablet gradient left border strip */}
                       <div className="hidden sm:block lg:hidden absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-accent" />
-                      <div className="flex items-center mb-4">
-                        <div className="p-3 rounded-lg bg-primary/10 mr-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center mb-4 sm:mb-6">
+                        <div className="p-3 rounded-lg bg-primary/10 w-fit mb-3 sm:mb-0 sm:mr-4">
                           <service.icon className="w-8 h-8 text-primary" />
                         </div>
-                        <h2 className="text-3xl font-bold text-foreground">{service.title}</h2>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-foreground">{service.title}</h2>
                       </div>
-                      <p className="text-lg text-muted-foreground mb-6">{service.description}</p>
-                      <div className="grid grid-cols-2 gap-3 mb-6">
+                      <p className="text-base sm:text-lg text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                         {service.features.map((feature, i) => (
-                          <div key={i} className="flex items-center text-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
-                            {feature}
+                          <div key={i} className="flex items-center text-sm sm:text-base">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent mr-2 flex-shrink-0" />
+                            <span>{feature}</span>
                           </div>
                         ))}
                       </div>
-                      <Button asChild variant="hero" size="lg" className="w-fit">
+                      <Button asChild variant="hero" size="lg" className="w-full sm:w-fit">
                         <Link href="/contact">Learn More</Link>
                       </Button>
                     </motion.div>
@@ -155,9 +155,9 @@ export default function Services() {
                     {/* Image */}
                     <motion.div
                       variants={staggerItem}
-                      className={`relative h-64 overflow-hidden rounded-2xl lg:h-full lg:min-h-[24rem] ${
+                      className={`hidden lg:block relative h-64 overflow-hidden rounded-2xl lg:h-full lg:min-h-[24rem] ${
                         index % 2 === 0 ? "lg:col-start-2" : "lg:col-start-1"
-                      } ${service.imageWrapperClassName ?? ""} sm:hidden lg:block`}
+                      } ${service.imageWrapperClassName ?? ""}`}
                     >
                       <Image
                         src={service.image}
