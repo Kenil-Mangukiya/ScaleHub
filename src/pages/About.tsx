@@ -103,7 +103,7 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-full">
           {/* Mobile: Section Header */}
           <div className="mb-6 sm:mb-8 lg:hidden flex items-center justify-center min-h-[60px] sm:min-h-[80px]">
-            <h2 className="text-3xl mt-6 sm:text-4xl font-bold text-white text-center">Our Journey</h2>
+            <h2 className="text-3xl mt-6 sm:text-4xl font-bold text-foreground text-center">Our Journey</h2>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start max-w-6xl mx-auto">
@@ -155,7 +155,7 @@ export default function About() {
                     >
                       {/* Mobile: Smaller marker, Desktop: Original */}
                       <span className="absolute left-[2px] sm:left-[4px] top-6 sm:top-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-accent shadow-[0_0_10px_#2dd4bf] sm:shadow-[0_0_15px_#2dd4bf]" />
-                      <div className="bg-white/5 backdrop-blur-md rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6 border border-white/10 shadow-md sm:shadow-lg hover:bg-white/10 transition-all w-full max-w-full overflow-hidden">
+                      <div className="bg-card/80 dark:bg-white/5 backdrop-blur-md rounded-lg sm:rounded-xl p-4 sm:p-5 lg:p-6 border border-border dark:border-white/10 shadow-md sm:shadow-lg hover:bg-card dark:hover:bg-white/10 transition-all w-full max-w-full overflow-hidden">
                         <item.Icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent mb-2 sm:mb-3" />
                         <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 sm:mb-2">{item.year}</h3>
                         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed break-words">{item.description}</p>
@@ -177,7 +177,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg sm:shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[3px] sm:before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full order-2 lg:order-2 w-full overflow-hidden"
+              className="relative bg-card/80 dark:bg-white/5 border border-border dark:border-white/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg sm:shadow-xl backdrop-blur-sm transition-all hover:shadow-2xl before:content-[''] before:absolute before:left-0 before:top-0 before:w-[3px] sm:before:w-[4px] before:h-full before:bg-gradient-to-b before:from-primary before:to-accent before:rounded-full order-2 lg:order-2 w-full overflow-hidden"
             >
               <Lightbulb className="w-8 h-8 sm:w-10 sm:h-10 text-primary mb-3 sm:mb-4" />
               <p className="text-primary/80 text-xs sm:text-sm uppercase tracking-wider mb-2">Who We Are</p>
@@ -252,16 +252,16 @@ export default function About() {
             variants={staggerContainer}
             className="max-w-3xl mx-auto text-center"
           >
-            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-white/70 backdrop-blur-xl border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40">
+            <div className="rounded-3xl p-10 md:p-14 text-center transition-all bg-card/90 backdrop-blur-xl border border-border shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:bg-white/5 dark:border-white/10 dark:shadow-xl dark:shadow-black/40">
               <motion.h2
                 variants={staggerItem}
-                className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+                className="text-3xl md:text-4xl font-bold text-foreground mb-6"
               >
                 Ready to Work Together?
               </motion.h2>
               <motion.p
                 variants={staggerItem}
-                className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+                className="text-lg text-muted-foreground mb-8"
               >
                 Join 500+ teams who trust ScaleHub to power their growth
               </motion.p>
@@ -277,7 +277,7 @@ export default function About() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-full px-8 py-4 border border-gray-300 dark:border-white/20 bg-white dark:bg-white/10 text-gray-800 dark:text-white transition-all duration-300 hover:bg-gray-100 hover:dark:bg-white/20"
+                  className="rounded-full px-8 py-4 border border-border bg-card hover:bg-secondary transition-all duration-300"
                 >
                   <Link href="/team">Meet Our Team</Link>
                 </Button>

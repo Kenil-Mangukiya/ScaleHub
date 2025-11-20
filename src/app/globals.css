@@ -4,28 +4,34 @@
 
 @layer base {
   :root {
-    --background: 220 40% 99%;
-    --foreground: 215 25% 20%;
+    /* Warm, soft white background - easier on the eyes */
+    --background: 240 20% 99%;
+    --foreground: 222 47% 11%;
 
+    /* Pure white cards with subtle warmth */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 20%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 20%;
+    --popover-foreground: 222 47% 11%;
 
+    /* Rich indigo primary - professional and modern */
     --primary: 243 75% 59%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 243 75% 50%;
+    --primary-hover: 243 75% 54%;
 
+    /* Vibrant teal accent - fresh and energetic */
     --accent: 173 80% 40%;
     --accent-foreground: 0 0% 100%;
     --accent-hover: 173 80% 35%;
 
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 215 25% 20%;
+    /* Soft gray-blue secondary - subtle and elegant */
+    --secondary: 220 25% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 215 15% 45%;
+    /* Muted tones for subtle backgrounds */
+    --muted: 220 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --success: 173 80% 40%;
     --success-foreground: 0 0% 100%;
@@ -33,12 +39,14 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
+    /* Refined borders - softer and more elegant */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 243 75% 59%;
 
     --radius: 0.75rem;
 
+    /* Beautiful gradients for light mode */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(243 75% 59%),
@@ -46,15 +54,16 @@
     );
     --gradient-hero: linear-gradient(
       135deg,
-      hsl(220 40% 99%),
-      hsl(220 30% 96%)
+      hsl(240 20% 99%),
+      hsl(220 25% 97%)
     );
 
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    /* Softer shadows for light mode */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --shadow-glow: 0 0 30px rgba(79, 70, 229, 0.2);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
   }
 
   .dark {
