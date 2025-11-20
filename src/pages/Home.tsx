@@ -193,25 +193,20 @@ export default function Home() {
                   "
                 >
                   {companies.map((company, index) => {
-                    const hideOnTablet = company.name === "Tata";
                     return (
                       <div
                         key={index}
-                        className={`snap-center shrink-0 lg:shrink lg:snap-none flex items-center px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)] ${
-                          hideOnTablet ? "hidden lg:flex" : ""
-                        }`}
+                        className="snap-center shrink-0 lg:shrink lg:snap-none flex items-center px-2.5 py-2 md:px-5 md:py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition gap-2 md:gap-3 shadow-[0_0_12px_rgba(255,255,255,0.03)]"
                       >
                         <Image
                           src={company.logo}
                           alt={company.name}
                           width={40}
                           height={40}
-                          className={`rounded-lg object-contain ${
-                            company.logoClassName ?? ""
-                          }`}
+                          className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain"
                           unoptimized={true}
                         />
-                        <span className="text-sm whitespace-nowrap">{company.name}</span>
+                        <span className="hidden md:inline text-sm whitespace-nowrap">{company.name}</span>
                       </div>
                     );
                   })}
@@ -407,12 +402,23 @@ export default function Home() {
               const isEnterprise = plan.id === "enterprise";
 
               return (
-                <motion.div key={plan.id} variants={staggerItem}>
+                <motion.div 
+                  key={plan.id} 
+                  variants={staggerItem}
+                  className={isGrowth ? "my-4" : ""}
+                >
                   <Card
-                    className={`p-6 border ${
+                    className={`relative p-6 border ${
                       isGrowth ? "border-primary/70 shadow-xl" : "border-border shadow-md"
                     } bg-card/90`}
                   >
+                    {plan.badge && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="text-[10px] font-medium px-3 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-lg">
+                          {plan.badge}
+                        </span>
+                      </div>
+                    )}
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
@@ -429,11 +435,6 @@ export default function Home() {
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-2">
-                        {plan.badge && (
-                          <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-sm">
-                            {plan.badge}
-                          </span>
-                        )}
                         <button
                           type="button"
                           onClick={() =>
