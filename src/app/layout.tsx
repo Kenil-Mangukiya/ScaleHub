@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   title: "ScaleHub | AI Automation & Digital Solutions",
   description:
     "ScaleHub helps modern teams automate workflows, build digital experiences, and scale smarter with AI-powered solutions.",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
