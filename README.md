@@ -4,7 +4,7 @@
 
 ---
 
-<img src="public/demo-screenshot.png" alt="ScaleHub Dashboard Preview" width="100%" style="border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);" />
+<img width="864" height="573" alt="Image" src="https://github.com/user-attachments/assets/c2c78ae7-d39c-4a72-af42-acc7c92ce40d" />
 
 ---
 
